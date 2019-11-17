@@ -11,20 +11,7 @@ object FrameSplitter {
       case "XX" => "X|X"
       case _ => s"${bonusBalls.padTo(2, '-')}|--"
     }
-
-//    val frames =
-      splitIntoFrames(s"${regularFrames.head}|$extraFrame")
-
-//    var i = 0
-//    for (a <- frames) {
-//      for (b <- a) {
-//        println(s"$i: $b")
-//      }
-//      println("***")
-//      i = i + 1
-//    }
-//
-//    frames
+    splitIntoFrames(s"${regularFrames.head}|$extraFrame")
   }
 
   val splitInto: String => (Array[String], Array[String]) = _.split("\\|\\|").splitAt(1)

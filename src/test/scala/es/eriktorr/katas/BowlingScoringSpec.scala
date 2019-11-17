@@ -1,9 +1,8 @@
 package es.eriktorr.katas
 
 import es.eriktorr.katas.BowlingScoring.scoreGame
-import org.scalatest.prop.TableDrivenPropertyChecks
 
-class BowlingScoringSpec extends UnitSpec with TableDrivenPropertyChecks {
+class BowlingScoringSpec extends DynamicUnitSpec {
 
   private val games = Table(
     ("game", "score"),
