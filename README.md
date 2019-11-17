@@ -1,4 +1,4 @@
-
+# Bowling Kata
 
 2. We also recommend you also include the SuperSafe Community Edition Scala compiler plugin, which will flag errors in your ScalaTest (and Scalactic) code at compile time, by first adding this line to ~/.sbt/1.0/global.sbt:
 
