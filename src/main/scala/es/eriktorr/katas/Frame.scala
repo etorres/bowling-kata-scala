@@ -59,15 +59,10 @@ trait Frame {
     case _ => 0
   }
 
+  def nextBall(): Int = nextBallIn(next)
+
   def nextBallIn(frame: Option[Frame]): Int = frame match {
     case Some(frame) => frame.balls.headOption.getOrElse(0)
-    case _ => 0
-  }
-
-  def nextBall(): Int = next match {
-    case Some(frame) =>
-      if (frame.balls.isEmpty) 0
-      else frame.balls.head
     case _ => 0
   }
 }
