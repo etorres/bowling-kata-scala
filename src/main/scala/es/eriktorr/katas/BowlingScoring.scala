@@ -1,13 +1,13 @@
 package es.eriktorr.katas
 
-import es.eriktorr.katas.FrameSplitter.framesFrom
+import es.eriktorr.katas.FrameSplitter.windowedFramesFrom
 
 import scala.annotation.tailrec
 
 object BowlingScoring {
 
-  def scoreGame(game: String): Int = {
-    val frames = framesFrom(game).to(List)
+  def scoreGame(frameScores: String): Int = {
+    val frames = windowedFramesFrom(frameScores).to(List)
     score(frames, 0)
   }
 
