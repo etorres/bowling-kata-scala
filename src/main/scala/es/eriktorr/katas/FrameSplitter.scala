@@ -2,14 +2,14 @@ package es.eriktorr.katas
 
 object FrameSplitter {
 
-  def windowedFramesFrom(frameScores: String): Iterator[Array[String]] = {
+  def windowedFramesFrom(frameScores: String): LazyList[Array[String]] = {
     val (regularFrames, bonusBalls) = extractFrom(frameScores)
     val extraFrame = asExtraFrame(bonusBalls)
     windowedFramesFrom(s"$regularFrames|$extraFrame", 3)
   }
 
-  val windowedFramesFrom: (String, Int) => Iterator[Array[String]] = (frameScores: String, windowsSize: Int) => {
-    frameScores.split("\\|").sliding(windowsSize, 1)
+  val windowedFramesFrom: (String, Int) => LazyList[Array[String]] = (frameScores: String, windowsSize: Int) => {
+    frameScores.split("\\|").sliding(windowsSize, 1).to(LazyList)
   }
 
   val extractFrom: String => (String, String) = (frameScores: String) => {
