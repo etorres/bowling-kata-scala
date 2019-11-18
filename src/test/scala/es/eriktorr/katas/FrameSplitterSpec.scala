@@ -1,6 +1,7 @@
 package es.eriktorr.katas
 
 import es.eriktorr.katas.FrameSplitter.windowedFramesFrom
+import es.eriktorr.katas.spec.UnitSpec
 
 class FrameSplitterSpec extends UnitSpec {
 

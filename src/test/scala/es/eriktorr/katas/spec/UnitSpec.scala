@@ -1,5 +1,5 @@
-package es.eriktorr.katas
+package es.eriktorr.katas.spec
 
-import org.scalatest.{FlatSpec, Inside, Inspectors, Matchers, OptionValues}
+import org.scalatest._
 
 abstract class UnitSpec extends FlatSpec with Matchers with OptionValues with Inside with Inspectors

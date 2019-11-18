@@ -1,4 +1,4 @@
-package es.eriktorr.katas
+package es.eriktorr.katas.spec
 
 import org.scalatest.prop.TableDrivenPropertyChecks
 

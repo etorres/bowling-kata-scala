@@ -19,6 +19,7 @@ object FrameSplitter {
 
   val asExtraFrame: String => String = {
     case "XX" => "X|X"
+    case "X" => "X|--"
     case bonusFrame => s"${bonusFrame.padTo(2, '-')}|--"
   }
 
