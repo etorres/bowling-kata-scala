@@ -1,8 +1,11 @@
 # Bowling Kata
 
-2. We also recommend you also include the SuperSafe Community Edition Scala compiler plugin, which will flag errors in your ScalaTest (and Scalactic) code at compile time, by first adding this line to ~/.sbt/1.0/global.sbt:
+Problem description:
 
-resolvers += "Artima Maven Repository" at "https://repo.artima.com/releases"
-3. Then adding the following line to project/plugins.sbt:
+Create a program, which, given a valid sequence of roll for one line of American Ten-Pin Bowling, produces the total score for the game. Here are some things that the program will not do:
 
-addSbtPlugin("com.artima.supersafe" % "sbtplugin" % "1.1.8")
+* We will not check for valid roll.
+* We will not check for correct number of roll and frames.
+* We will not provide scores for intermediate frames.
+
+Complete description [here](http://katalyst.codurance.io/bowling).

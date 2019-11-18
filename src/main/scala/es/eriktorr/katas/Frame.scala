@@ -40,7 +40,7 @@ object Frame {
         val firstBall = a.toInt
         Some(Spare(Seq(firstBall, 10 - firstBall), next))
       case r"(\d)$a(\d)$b" => Some(Regular(Seq(a.toInt, b.toInt), next))
-      case _ => None
+      case _ => throw new IllegalArgumentException(s"failed to parse frame score $frameScore")
     }
     frame
   }
