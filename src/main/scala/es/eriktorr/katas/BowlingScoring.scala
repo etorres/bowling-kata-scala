@@ -8,7 +8,7 @@ object BowlingScoring {
 
   def scoreGame(frameScores: String): Int = {
     windowedFramesFrom(frameScores).par
-      .map(Frame(_))
+      .map(WindowedFrame(_))
       .map(_.score)
       .sum
   }
