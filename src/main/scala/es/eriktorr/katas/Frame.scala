@@ -1,30 +1,22 @@
 package es.eriktorr.katas
 
-object Frame {
-  private case class Regular(balls: Seq[Int], next: Option[Frame]) extends Frame {
-    override def score: Int = balls.sum
+object FrameBuilder {
+  private case class Regular(balls: Seq[Int]) extends Frame {
+    override def scoringBalls: Int = 2
   }
 
-  private case class Strike(next: Option[Frame]) extends Frame {
+  private case class Spare(balls: Seq[Int]) extends Frame {
+    override def scoringBalls: Int = 3
+  }
+
+  private case object Strike extends Frame {
     override def balls: Seq[Int] = Seq(10)
-    override def score: Int = balls.head + nextTwoBalls
+    override def scoringBalls: Int = 3
   }
 
-  private case class Spare(balls: Seq[Int], next: Option[Frame]) extends Frame {
-    override def score: Int = balls.sum + nextBall
-  }
+  def apply(frameScore: String): Frame = frameFrom(frameScore)
 
-  def apply(frameScores: Array[String]): Frame = {
-    val afterNext = frameFrom(frameScores, 2, None)
-    val next = frameFrom(frameScores, 1, afterNext)
-    frameFrom(frameScores, 0, next).get
-  }
-
-  private def frameFrom(frameScores: Array[String], position: Int, next: Option[Frame]): Option[Frame] = {
-    if (frameScores.length > position) frameFrom(frameScores(position), next) else None
-  }
-
-  private def frameFrom(frameScore: String, next: Option[Frame]): Option[Frame] = {
+  private def frameFrom(frameScore: String): Frame = {
     import util.matching.Regex
 
     implicit class RegexContext(sc: StringContext) {
@@ -32,14 +24,14 @@ object Frame {
     }
 
     val frame = frameScore match {
-      case "X" => Some(Strike(next))
-      case "--" => Some(Regular(Seq(0, 0), next))
-      case s"$a-" => Some(Regular(Seq(a.toInt, 0), next))
-      case s"-$b" => Some(Regular(Seq(0, b.toInt), next))
+      case "X" => Strike
+      case "--" => Regular(Seq(0, 0))
+      case s"$a-" => Regular(Seq(a.toInt, 0))
+      case s"-$b" => Regular(Seq(0, b.toInt))
       case s"$a/" =>
         val firstBall = a.toInt
-        Some(Spare(Seq(firstBall, 10 - firstBall), next))
-      case r"(\d)$a(\d)$b" => Some(Regular(Seq(a.toInt, b.toInt), next))
+        Spare(Seq(firstBall, 10 - firstBall))
+      case r"(\d)$a(\d)$b" => Regular(Seq(a.toInt, b.toInt))
       case _ => throw new IllegalArgumentException(s"failed to parse frame score $frameScore")
     }
     frame
@@ -48,21 +40,5 @@ object Frame {
 
 trait Frame {
   def balls: Seq[Int]
-  def next: Option[Frame]
-  def score: Int
-
-  def nextTwoBalls(): Int = next match {
-    case Some(frame) =>
-      if (frame.balls.isEmpty) return 0
-      if (frame.balls.size > 1) frame.balls.take(2).sum
-      else frame.balls.head + nextBallIn(frame.next)
-    case _ => 0
-  }
-
-  def nextBall(): Int = nextBallIn(next)
-
-  def nextBallIn(frame: Option[Frame]): Int = frame match {
-    case Some(frame) => frame.balls.headOption.getOrElse(0)
-    case _ => 0
-  }
+  def scoringBalls: Int
 }
